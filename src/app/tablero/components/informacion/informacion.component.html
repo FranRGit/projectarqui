@@ -1,0 +1,35 @@
+<div class="main">
+    <div class="cliente-container">
+        <div class="combobox-container">
+            <select id="myCombobox" (change)="onSelectChange($event)">
+                <option *ngFor="let cliente of clientes" [value]="cliente.ID">
+                    {{cliente.nombre}} {{cliente.apellido}}
+                </option>
+            </select>
+        </div>
+        <div class="info-container">
+            <div class="white2-box">
+                <h2>Informacion cliente</h2>
+                <div class="info-text">
+                    <p>ID: {{selectedCliente?.ID}} </p>
+                    <p>Nombre: {{selectedCliente?.nombre}}</p>
+                    <p>Apellido: {{selectedCliente?.apellido}}</p>
+                    <p>Telefono: {{selectedCliente?.telefono}}</p>
+                    <p>Email: {{selectedCliente?.email}}</p>
+                    <p>Historial </p>
+                </div>
+            </div>  
+        </div>
+    </div>
+    <div class="sensor-container">
+        <div class="white-box">
+            <h2>Altura aproximada</h2>
+            <p>{{datoSensor}} cms</p>
+        </div>    
+        <div class="button-container">
+            <button class="button" (click)="sensor()">Capturar datos</button>
+            <button class="button">Registrar</button>
+        </div> 
+    </div>
+</div>
+

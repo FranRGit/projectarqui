@@ -1,0 +1,66 @@
+.main {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    padding: 20px;
+}
+
+.sensor-container, .cliente-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.white-box {
+    background-color: #ffffff;
+    padding: 20px;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 300px;
+    margin: 20px auto; 
+}
+
+.white2-box {
+    background-color: #ffffff;
+    padding: 20px;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 400px;
+    margin: 20px auto; 
+}
+
+.combobox-container {
+    position: absolute;
+    top: 20px;
+}
+
+.cliente-container {
+    position: relative;
+}
+
+.info-text {
+    text-align: left;
+}
+
+.button-container {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #ffffff; 
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 0 10px;
+}
+
+.button:hover {
+    background-color: #0056b3;
+}
