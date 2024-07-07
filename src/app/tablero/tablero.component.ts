@@ -1,11 +1,9 @@
 import { Component } from '@angular/core';
-import { InformacionComponent } from './components/informacion/informacion.component';
-import { GraficoComponent } from './components/grafico/grafico.component';
-
+import { RouterModule } from '@angular/router';
 @Component({
   selector: 'app-tablero',
   standalone: true,
-  imports: [InformacionComponent,GraficoComponent],
+  imports:[RouterModule],
   templateUrl: './tablero.component.html',
   styleUrl: './tablero.component.scss'
 })

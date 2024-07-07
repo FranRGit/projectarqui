@@ -1,0 +1,60 @@
+<div class="auth-main">
+    <div class="auth-wrapper">
+        <div class="auth-form">
+            <div class="card">
+                <div class="card-body">
+                    <div class="logo-container">
+                        <img src="assets/images/logo-dark.svg" alt="Logo" />
+                    </div>
+                    <div class="auth-header">
+                        <h2>Registrarse</h2>
+                        <p>Ingresa tus credenciales para continuar</p>
+                    </div>
+                    <div class="auth-options">
+                        <button class="btn-google">
+                            <img src="assets/images/google.png" alt="Google Icon" />
+                            Registrate con Google
+                        </button>
+                        <div class="separator">
+                            <span>OR</span>
+                        </div>
+                        <h5>Registrate con Email </h5>
+                    </div>
+                    <form>
+                        <div class="input-group">
+                            <label for="first-name">Nombres</label>
+                            <input type="text" id="first-name" name="first-name" [(ngModel)]="nombre" required />
+                        </div>
+                        <div class="input-group">
+                            <label for="last-name">Apellidos</label>
+                            <input type="text" id="last-name" name="last-name" [(ngModel)]="apellido" required />
+                        </div>
+                        <div class="input-group">
+                            <label for="telefono">Telefono</label>
+                            <input type="telefono" id="telefono" name="telefono" [(ngModel)]="telefono" required />
+                        </div>
+                        <div class="input-group">
+                            <label for="email">Correo electrónico</label>
+                            <input type="email" id="email" name="email" [(ngModel)]="email" required />
+                        </div>
+                        <div class="input-group">
+                            <label for="password">Contraseña</label>
+                            <input type="password" id="password" name="password" [(ngModel)]="password" required />
+                        </div>
+                        <div class="form-options">
+                            <label>
+                                <input type="checkbox" name="terms" required />
+                                Agree with <a href="#">Terms & Condition</a>
+                            </label>
+                        </div>
+                        <button type="submit" class="btn-submit" (click)="register()">Registrarse</button>
+                    </form>
+                    <hr />
+                    <div class="register-link">
+                        <a href="/guest/login">¿Ya tienes una cuenta? Ingresa</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

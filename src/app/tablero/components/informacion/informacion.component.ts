@@ -1,55 +1,78 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
 import { Cliente } from 'src/app/Interfaces/Cliente';
-import { DataConnectionService } from 'src/app/services/DataConnection/data-connection.service';
+import { DataConnectionService } from 'src/app/services/data-connection.service';
+import { Router, RouterModule } from '@angular/router';
+import { Turno } from 'src/app/Interfaces/Turno';
+import { TurnoService } from 'src/app/services/turnos.service';
+import { Sp32Service } from 'src/app/services/sp32.service';
 
 @Component({
   selector: 'app-informacion',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,RouterModule],
   templateUrl: './informacion.component.html',
   styleUrl: './informacion.component.scss'
 })
 export class InformacionComponent {
-  //HTTP
-  private ESP32_IP = '192.168.50.240';
-  private ESP32_URL = `http://${this.ESP32_IP}`;
-
+  
   //Variables BD
   datoSensor= "";
-  selectedCliente:Cliente | null = null;
-  clientes:Cliente[] = [];
-  Nombre="";
-  Apellido="";
-  Telefono="";
-  Email="";
+  @Input() turnoID="";
+  turno: Turno = {} as Turno;
+  cliente:Cliente ={} as Cliente;
+
 
   //Constructor
-  constructor(private http: HttpClient, private firebase:DataConnectionService) {}
+  constructor(private sp32Service:Sp32Service, private clienteService:DataConnectionService, private router:Router, private turnoService: TurnoService) {}
+  
 
-  //Inicialización
+  //OBTENER CLIENTE
   ngOnInit(): void {
-    this.firebase.getClientes().subscribe((clientes:Cliente[]) => {
-      console.log(clientes);
-      this.clientes=clientes;
+    if (this.turnoID) {
+      this.turnoService.getTurnoByID(this.turnoID).subscribe(turno => {
+        this.turno = turno;
+        console.log(this.turno)
+        this.obtenerCliente();
+      });
+    }
+  }
+
+  obtenerCliente(){
+    if (this.turno) {
+      this.turnoService.getClienteFromTurno(this.turno).subscribe(cliente => {
+        this.cliente = cliente;
+      });
+    }
+  }
+
+  //CAPTURAR DATOS DEL SENSOR
+  capturarDatosSensor(){
+    this.sp32Service.capturarDato().subscribe(response => {
+      this.datoSensor= response;
     })
-    
-  }
-
-  //Datos del Cliente
-  onSelectChange(event: Event): void {
-    const selectElement = event.target as HTMLSelectElement;
-    const selectedID = selectElement.value;
-    this.selectedCliente = this.clientes.find(cliente => cliente.ID === selectedID) || null;
   }
 
 
-
-  //HTML SENSOR
-  sensor(){
-    this.http.get("http://192.168.50.240/sensor", {responseType: 'text'}).subscribe(response => {
-      this.datoSensor = response;
-    });
+  //REGISTRAR
+  registrar(){
+    if(this.turno){
+      let altura: number = parseFloat(this.datoSensor);
+      this.clienteService.updateEmpleado(this.cliente,altura);
+      this.turnoService.updateTurnoEstado(this.turno.ID);
+      this.sp32Service.datoRegistrado().subscribe(response => {
+      })
+    }
+    else{
+      alert("Turno cancelado")
+    }
+    this.irATurnos();
   }
+
+  //REGRESAR PANEL TURNOS
+  irATurnos(){
+    this.router.navigate(['tablero/turnos']) 
+  }
+
+  
 }

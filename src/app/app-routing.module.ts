@@ -19,36 +19,65 @@ import { ProductComponent } from './dashboard/dashboard-components/product/produ
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { FullComponent } from './layouts/full/full.component';
 import { TableroComponent } from './tablero/tablero.component';
+import { TurnosComponent } from './tablero/components/turnos/turnos.component';
+import { AtencionComponent } from './tablero/components/atencion/atencion.component';
+import { LoginComponent } from './autenticacion/login/login.component';
+import { AutenticacionComponent } from './autenticacion/autenticacion.component';
+import { RegisterComponent } from './autenticacion/register/register.component';
+import { TableroUsuarioComponent } from './Usuario/tablero-usuario/tablero-usuario.component';
+import {canActivate, redirectUnauthorizedTo} from '@angular/fire/auth-guard'
+import { TurnoUsuarioComponent } from './Usuario/tablero-usuario/turno-usuario/turno-usuario.component';
 
 const routes: Routes = [
   {
-    path:"",
-    component:FullComponent,
+    path: "",
+    component: FullComponent, ...canActivate(()=> redirectUnauthorizedTo(['/login'])),
     children: [
-      {path:"", redirectTo:"/home", pathMatch:"full"},
-      {path:"home", component:DashboardComponent},
-      {path:"tablero", component:TableroComponent},
-      {path:"alerts", component:AlertsComponent},
-      {path:"forms", component:FormsComponent},
-      {path:"table", component:ProductComponent},
-      {path:"grid-list", component:GridListComponent},
-      {path:"menu", component:MenuComponent},
-      {path:"tabs", component:TabsComponent},
-      {path:"expansion", component:ExpansionComponent},
-      {path:"chips", component:ChipsComponent},
-      {path:"progress", component:ProgressComponent},
-      {path:"toolbar", component:ToolbarComponent},
-      {path:"progress-snipper", component:ProgressSnipperComponent},
-      {path:"snackbar", component:SnackbarComponent},
-      {path:"slider", component:SliderComponent},
-      {path:"slide-toggle", component:SlideToggleComponent},
-      {path:"tooltip", component:TooltipsComponent},
-      {path:"button", component:ButtonsComponent},
+      { path: "", redirectTo: "home", pathMatch: "full" },
+      { path: "home", component: DashboardComponent },
+      { path: "tablero", component: TableroComponent,
+        children: [
+          { path: "", redirectTo: "turnos", pathMatch: "full" },
+          { path: "turnos", component: TurnosComponent },
+          { path: "atencion", component: AtencionComponent }
+        ]
+      },
+      { path: "alerts", component: AlertsComponent },
+      { path: "forms", component: FormsComponent },
+      { path: "table", component: ProductComponent },
+      { path: "grid-list", component: GridListComponent },
+      { path: "menu", component: MenuComponent },
+      { path: "tabs", component: TabsComponent },
+      { path: "expansion", component: ExpansionComponent },
+      { path: "chips", component: ChipsComponent },
+      { path: "progress", component: ProgressComponent },
+      { path: "toolbar", component: ToolbarComponent },
+      { path: "progress-snipper", component: ProgressSnipperComponent },
+      { path: "snackbar", component: SnackbarComponent },
+      { path: "slider", component: SliderComponent },
+      { path: "slide-toggle", component: SlideToggleComponent },
+      { path: "tooltip", component: TooltipsComponent },
+      { path: "button", component: ButtonsComponent },
+    ]
+  },
+  {
+    path: "autenticacion",
+    component: AutenticacionComponent,
+    children: [
+      { path: "", redirectTo: "login", pathMatch: "full" },
+      { path: "login", component: LoginComponent },
+      { path: "register", component: RegisterComponent }
     ]
   },
 
-  {path:"", redirectTo:"/home", pathMatch:"full"},
-  {path:"**", redirectTo:"/home", pathMatch:"full"},
+  {
+    path: "usuario",
+    component: TableroUsuarioComponent, ...canActivate(()=> redirectUnauthorizedTo(['/login'])),
+  },
+  {path:"turno", component:TurnoUsuarioComponent},
+
+  { path: "", redirectTo: "/autenticacion/usuario", pathMatch: "full" },
+  { path: "**", redirectTo: "/autenticacion/usuario", pathMatch: "full" },
 ];
 
 @NgModule({

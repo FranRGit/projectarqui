@@ -1,0 +1,28 @@
+<div class="header-container">
+    <div class="bienvenido-container">
+        <p>Bienvenido {{cliente.nombre}}!</p>
+    </div>
+    <div class="logout-container">
+        <button class="button" (click)="salirSesion()">Logout</button>
+    </div>
+</div>
+<div class="main">
+    <div class="cliente-container">
+        <div class="info-container">
+            <div class="white2-box">
+                <h2>Informacion cliente</h2>
+                <div class="info-text">
+                    <p>Nombre: {{cliente.nombre}}</p>
+                    <p>Apellido: {{cliente.apellido}}</p>
+                    <p>Telefono: {{cliente.telefono}}</p>
+                    <p>Email: {{cliente.email}}</p>
+                </div>
+            </div>            
+        </div>
+        <div class="button-cotainer">
+            <button class="button" (click)="solicitarTurno()">Solicitar turno</button>
+        </div>
+    </div>
+    <app-grafico [historial]="historial"></app-grafico>
+</div>
+<router-outlet></router-outlet>

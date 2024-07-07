@@ -1,0 +1,13 @@
+<div class="main-container">
+    <div class="turnos-container">
+        <div *ngFor="let turno of turnos; let i = index">
+            <p>Turno {{ i + 1 }}: {{ turno.ID }}</p>
+            <button>Ver Más</button>
+        </div>
+    </div>
+    <div class="acciones-container">
+        <button (click)="irAAtencion(turnos[0])">Atender</button>
+        <button (click)="siguienteTurno(turnos[0].ID)">Siguiente</button>
+    </div>
+</div>
+<router-outlet></router-outlet>

@@ -1,30 +1,22 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { GraficoComponent } from './components/grafico/grafico.component';
-import { InformacionComponent } from './components/informacion/informacion.component';
-import { TableroComponent } from './tablero.component';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { DemoFlexyModule } from '../demo-flexy-module';
 import { FormsModule } from '@angular/forms';
-import { MatCardModule } from '@angular/material/card'; // Importa MatCardModule
-
+import { MatCardModule } from '@angular/material/card'; 
+import { RouterModule } from '@angular/router';
 
 @NgModule({
-  declarations: [
-    GraficoComponent,
-    InformacionComponent,
-    TableroComponent
-  ],
+  declarations: [],
   imports: [
     CommonModule,
+    RouterModule,
     MatCardModule,
     DemoFlexyModule,
     FormsModule,
+    RouterModule,
     NgApexchartsModule
   ],
-  exports:[
-    GraficoComponent,
-    InformacionComponent
-  ],
+  exports:[],
 })
 export class TableroModule { }

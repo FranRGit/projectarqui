@@ -1,0 +1,35 @@
+<div class="header-container">
+    <div class="bienvenido-container">
+        <p>Bienvenido {{ cliente.nombre }}!</p>
+    </div>
+    <div class="logout-container">
+        <button class="button" (click)="salirSesion()">Logout</button>
+    </div>
+</div>
+
+<div class="main">
+    <div class="cliente-container">
+        <div class="info-container">
+            <div class="white2-box">
+                <div class="info-text">
+                    <ng-container *ngIf="this.turno?.estado !== 'Atendido'">
+                        <h2>Información del turno</h2>
+                        <p>Clientes en cola: {{ clientesEnCola }}</p>
+                        <p>Estado de turno: {{ estadoTurno }}</p>
+                    </ng-container>
+                    <ng-container *ngIf="this.turno?.estado  === 'Atendido'">
+                        <h2>Resultados del turno</h2>
+                        <p>Nombre: {{cliente.nombre}}</p>
+                        <p>Apellido: {{cliente.apellido}}</p>
+                        <p>Altura obtenida : {{cliente.historial[cliente.historial.length-1]}}</p>
+
+                    </ng-container>
+                </div>
+            </div>
+        </div>
+        <div class="button-container">
+            <button class="button" *ngIf="this.turno?.estado  === 'Atendido'" (click)="cancelarTurno()">Aceptar</button>
+            <button class="button" *ngIf="this.turno?.estado  !== 'Atendido'"(click)="cancelarTurno()">Cancelar turno</button>
+        </div>
+    </div>
+</div>

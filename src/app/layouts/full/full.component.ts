@@ -33,19 +33,19 @@ export class FullComponent {
       link: "/tablero",
       icon: "home",
       menu: "Tablero",
+    },
+    {
+      link: "/home",
+      icon: "home",
+      menu: "Dashboard",
     },   
-    {
-      link: "/home",
-      icon: "home",
-      menu: "Dashboard",
-    },
     /*{
     {
       link: "/home",
       icon: "home",
       menu: "Dashboard",
     },
-    /*{
+   {
       link: "/button",
       icon: "disc",
       menu: "Buttons",

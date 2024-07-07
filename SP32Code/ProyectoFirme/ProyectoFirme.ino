@@ -4,7 +4,7 @@
 
 const char* ssid = "MOVISTAR_FE80";
 const char* password = "franciS#2067";
-
+const int buzzerPin = 16;
 AsyncWebServer server(80);
 
 
@@ -21,6 +21,10 @@ void setup() {
   Serial.print("Dirección IP: ");
   Serial.println(WiFi.localIP());
   
+
+  //Buzzer
+  pinMode(buzzerPin,OUTPUT);
+
   // Rutas de ejemplo
   server.on("/", HTTP_GET, [](AsyncWebServerRequest *request){
     AsyncWebServerResponse *response = request->beginResponse(200, "text/plain", "¡Hola desde ESP32!");
@@ -37,10 +41,24 @@ void setup() {
     request->send(response);
   });
 
+  server.on("/registroExitoso", HTTP_GET, [](AsyncWebServerRequest *request){
+    encenderBuzzer();
+
+    AsyncWebServerResponse *response = request->beginResponse(200, "text/plain", "distanciaStr");
+    response->addHeader("Access-Control-Allow-Origin", "*"); 
+    request->send(response);
+  });
+
   server.begin();
 }
 
-
+//BUZZER 
+void encenderBuzzer(){
+  digitalWrite(buzzerPin,HIGH);
+  delay(1000);
+  digitalWrite(buzzerPin,LOW);
+  delay(1000);
+}
 //SENSOR ULTRASONICO
 long readUltrasonicDistance(int triggerPin, int echoPin){
   //Iniciamos el pin del emisor de reuido en salida

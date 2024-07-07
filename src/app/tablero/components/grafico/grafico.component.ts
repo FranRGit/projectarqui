@@ -1,4 +1,4 @@
-import {Component,ViewChild } from '@angular/core';
+import { Component, Input, ViewChild, OnChanges, SimpleChanges } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import {
@@ -14,7 +14,6 @@ import {
   ApexXAxis,
   ApexGrid
 } from 'ng-apexcharts';
-
 
 export interface activeusercardChartOptions {
   series: ApexAxisChartSeries;
@@ -32,32 +31,33 @@ export interface activeusercardChartOptions {
 @Component({
   selector: 'app-grafico',
   standalone: true,
-  imports: [MatCardModule,NgApexchartsModule],
+  imports: [MatCardModule, NgApexchartsModule],
   templateUrl: './grafico.component.html',
-  styleUrl: './grafico.component.scss'
+  styleUrls: ['./grafico.component.scss']
 })
-export class GraficoComponent {
+export class GraficoComponent implements OnChanges {
+  @Input() historial: number[] = [];
 
   @ViewChild("activeusercardchart") chart1: ChartComponent = Object.create(null);
-  public activeusercardChartOptions !: Partial<activeusercardChartOptions> | any;
+  public activeusercardChartOptions!: Partial<activeusercardChartOptions> | any;
 
-  constructor() {
-    // active users
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['historial'] && changes['historial'].currentValue) {
+      this.actualizarGrafico();
+    }
+  }
+
+  actualizarGrafico() {
     this.activeusercardChartOptions = {
       series: [
         {
-          name: 'Ample Admin',
-          data: [355, 390, 300, 350, 390, 180, 355, 390, 300, 350, 390, 180],
+          name: 'Historial de Alturas',
+          data: this.historial,
           color: "#fb9678",
-        },
-        {
-          name: 'Pixel Admin',
-          data: [280, 250, 325, 215, 250, 310, 280, 250, 325, 215, 250, 310],
-          color: "#03c9d7",
-        },
+        }
       ],
       xaxis: {
-        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+        categories: this.historial.map((altura, index) => `Altura ${index + 1}`),
       },
       chart: {
         toolbar: {
@@ -65,41 +65,30 @@ export class GraficoComponent {
         },
         type: 'bar',
         height: 300,
-
       },
       legend: {
         show: false,
       },
-
       tooltip: {
         theme: "dark"
       },
-
       grid: {
         show: false,
       },
-
       dataLabels: {
         enabled: false,
       },
-
       stroke: {
         show: true,
         width: 5,
         colors: ['none']
       },
-
       plotOptions: {
         bar: {
           columnWidth: '45%',
           borderRadius: 8,
         },
       },
-    }
+    };
   }
-
-
 }
-  
- 
-
