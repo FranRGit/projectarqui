@@ -35,10 +35,15 @@ export class FullComponent {
       menu: "Tablero",
     },
     {
+      link: "/Clientes",
+      icon: "info",
+      menu: "Clientes",
+    },
+    /*{
       link: "/home",
       icon: "home",
       menu: "Dashboard",
-    },   
+    },*/   
     /*{
     {
       link: "/home",

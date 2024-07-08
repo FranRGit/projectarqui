@@ -76,8 +76,8 @@ const routes: Routes = [
   },
   {path:"turno", component:TurnoUsuarioComponent},
 
-  { path: "", redirectTo: "/autenticacion/usuario", pathMatch: "full" },
-  { path: "**", redirectTo: "/autenticacion/usuario", pathMatch: "full" },
+  { path: "", redirectTo: "/autenticacion/login", pathMatch: "full" },
+  { path: "**", redirectTo: "/autenticacion/login", pathMatch: "full" },
 ];
 
 @NgModule({
