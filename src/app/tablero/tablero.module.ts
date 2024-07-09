@@ -19,4 +19,4 @@ import { RouterModule } from '@angular/router';
   ],
   exports:[],
 })
-export class TableroModule { }
+export class TableroModule{ }

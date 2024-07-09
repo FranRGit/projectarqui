@@ -1,0 +1,8 @@
+<div class="main-container">
+    <div class="cliente-container">
+        <div *ngFor="let cliente of clientes; let i = index" class="cliente-card">
+            <p>Cliente {{ i + 1 }}: {{ cliente.nombre }} {{cliente.apellido}} </p>
+            <p>Telefono {{cliente.telefono}} </p>
+            <p>Email {{cliente.email}} </p>
+        </div>
+    </div>

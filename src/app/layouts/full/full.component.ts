@@ -35,9 +35,14 @@ export class FullComponent {
       menu: "Tablero",
     },
     {
-      link: "/Clientes",
+      link: "/cliente",
       icon: "info",
       menu: "Clientes",
+    },
+    {
+      link: "/usuario",
+      icon: "menu",
+      menu: "Usuario",
     },
     /*{
       link: "/home",

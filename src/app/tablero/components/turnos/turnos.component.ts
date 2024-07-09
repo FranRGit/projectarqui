@@ -20,6 +20,7 @@ export class TurnosComponent implements OnInit {
 
   //Turno
   turnos:Turno[] =[];
+  turno:Turno = {} as Turno
   
   //Inicializador
   ngOnInit(): void {
@@ -39,6 +40,22 @@ export class TurnosComponent implements OnInit {
       console.error("No hay turnos reservados") 
     } else{
       this.router.navigate(['tablero/atencion'], { queryParams: { id: turno.ID } });
+    }
+  }
+
+  //Modal
+  abrirModal(turno: Turno) {
+    this.turno = turno;
+    const modal = document.getElementById("myModal");
+    if (modal) {
+      modal.style.display = "block";
+    }
+  }
+
+  cerrarModal() {
+    const modal = document.getElementById("myModal");
+    if (modal) {
+      modal.style.display = "none";
     }
   }
 }

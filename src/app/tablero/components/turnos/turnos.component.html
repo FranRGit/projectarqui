@@ -1,13 +1,19 @@
 <div class="main-container">
     <div class="turnos-container">
-        <div *ngFor="let turno of turnos; let i = index">
+        <div *ngFor="let turno of turnos; let i = index" class="turno-card">
             <p>Turno {{ i + 1 }}: {{ turno.ID }}</p>
-            <button>Ver Más</button>
         </div>
     </div>
     <div class="acciones-container">
-        <button (click)="irAAtencion(turnos[0])">Atender</button>
-        <button (click)="siguienteTurno(turnos[0].ID)">Siguiente</button>
+        <button (click)="irAAtencion(turnos[0])" class="button">Atender</button>
+        <button (click)="siguienteTurno(turnos[0].ID)" class="button">Siguiente</button>
+    </div>
+</div>
+
+<div id="myModal" class="modal">
+    <div class="modal-content">
+        <span class="close" (click)="cerrarModal()">&times;</span>
+        <p></p>
     </div>
 </div>
 <router-outlet></router-outlet>

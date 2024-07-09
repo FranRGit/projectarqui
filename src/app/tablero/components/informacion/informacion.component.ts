@@ -58,7 +58,7 @@ export class InformacionComponent {
   registrar(){
     if(this.turno){
       let altura: number = parseFloat(this.datoSensor);
-      this.clienteService.updateEmpleado(this.cliente,altura);
+      this.clienteService.updateCliente(this.cliente,altura);
       this.turnoService.updateTurnoEstado(this.turno.ID);
       this.sp32Service.datoRegistrado().subscribe(response => {
       })

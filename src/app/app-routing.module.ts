@@ -27,14 +27,14 @@ import { RegisterComponent } from './autenticacion/register/register.component';
 import { TableroUsuarioComponent } from './Usuario/tablero-usuario/tablero-usuario.component';
 import {canActivate, redirectUnauthorizedTo} from '@angular/fire/auth-guard'
 import { TurnoUsuarioComponent } from './Usuario/tablero-usuario/turno-usuario/turno-usuario.component';
+import { ClientesComponent } from './clientes/clientes.component';
 
 const routes: Routes = [
   {
     path: "",
     component: FullComponent, ...canActivate(()=> redirectUnauthorizedTo(['/login'])),
     children: [
-      { path: "", redirectTo: "home", pathMatch: "full" },
-      { path: "home", component: DashboardComponent },
+      { path: "", redirectTo: "tablero", pathMatch: "full" },
       { path: "tablero", component: TableroComponent,
         children: [
           { path: "", redirectTo: "turnos", pathMatch: "full" },
@@ -42,6 +42,8 @@ const routes: Routes = [
           { path: "atencion", component: AtencionComponent }
         ]
       },
+      { path: "cliente", component: ClientesComponent},
+      { path: "usuario", component: TableroUsuarioComponent, ...canActivate(()=> redirectUnauthorizedTo(['/login'])),},
       { path: "alerts", component: AlertsComponent },
       { path: "forms", component: FormsComponent },
       { path: "table", component: ProductComponent },

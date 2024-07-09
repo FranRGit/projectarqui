@@ -36,13 +36,13 @@ export class DataConnectionService {
   }
 
   //Eliminar empleado
-  deleteEmpleado(cliente:Cliente){
+  deleteCLiente(cliente:Cliente){
     const clienteDocRef = doc(this.firestore,  `Clientes/${cliente.ID}`);
     return deleteDoc(clienteDocRef);
   }
 
   //Ingresar altura empleado
-  updateEmpleado(cliente:Cliente, nuevaAltura:number){
+  updateCliente(cliente:Cliente, nuevaAltura:number){
     const empleadoDocRef = doc(this.firestore, `Clientes/${cliente.ID}`);
     return updateDoc(empleadoDocRef, {historial:arrayUnion(nuevaAltura)});
   }
