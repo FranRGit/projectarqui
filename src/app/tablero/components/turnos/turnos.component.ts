@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { Turno } from 'src/app/Interfaces/Turno';
 import { DataConnectionService } from 'src/app/services/data-connection.service';
+import { Sp32Service } from 'src/app/services/sp32.service';
 import { TurnoService } from 'src/app/services/turnos.service';
 
 @Component({
@@ -16,7 +17,7 @@ export class TurnosComponent implements OnInit {
   
   //---DEFINICION--
   //Constructor
-  constructor(private router:Router, private turnoService:TurnoService, private clienteService:DataConnectionService){}
+  constructor(private router:Router, private turnoService:TurnoService, private clienteService:DataConnectionService, private sp32Service:Sp32Service){}
 
   //Turno
   turnos:Turno[] =[];
@@ -31,7 +32,7 @@ export class TurnosComponent implements OnInit {
 
   //--PRUEBA--
   siguienteTurno(idTurno:string){
-    this.turnoService.removeTurno(idTurno);  
+    this.turnoService.removeTurno(idTurno);      
   }
   //RUTAS
   //Ir al componente de atención
@@ -43,19 +44,5 @@ export class TurnosComponent implements OnInit {
     }
   }
 
-  //Modal
-  abrirModal(turno: Turno) {
-    this.turno = turno;
-    const modal = document.getElementById("myModal");
-    if (modal) {
-      modal.style.display = "block";
-    }
-  }
 
-  cerrarModal() {
-    const modal = document.getElementById("myModal");
-    if (modal) {
-      modal.style.display = "none";
-    }
-  }
 }

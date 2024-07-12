@@ -10,7 +10,7 @@ AsyncWebServer server(80);
 
 //---------------[DISPLAY]---------------------------
 // Definición de pines para los segmentos del display
-const int a = 25;
+const int a = 17;
 const int b = 26;
 const int c = 27;
 const int d = 18;
@@ -69,8 +69,17 @@ void setup() {
     request->send(response);
   });
 
+  server.on("/registroExitoso", HTTP_GET, [](AsyncWebServerRequest *request){
+    encenderBuzzer();
+
+    AsyncWebServerResponse *response = request->beginResponse(200, "text/plain", "distanciaStr");
+    response->addHeader("Access-Control-Allow-Origin", "*"); 
+    request->send(response);
+  });
+
   server.on("/sensor", HTTP_GET, [](AsyncWebServerRequest *request){
     double distancia = calculardistancia();
+    Serial.print(distancia);
     String distanciaStr = String(distancia);
     
     AsyncWebServerResponse *response = request->beginResponse(200, "text/plain", distanciaStr);
@@ -135,9 +144,10 @@ long readUltrasonicDistance(int triggerPin, int echoPin){
 }
 
 double calculardistancia(){
-  double distancia = 25-0.01723 * readUltrasonicDistance(13, 12);
+  double distancia = 26-0.01723 * readUltrasonicDistance(23, 22);
   return distancia;
 }
 
 void loop(){
+
 }

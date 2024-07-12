@@ -10,6 +10,7 @@ import { Cliente } from 'src/app/Interfaces/Cliente';
 import { Turno } from 'src/app/Interfaces/Turno';
 import { AuthService } from 'src/app/services/auth.service';
 import { DataConnectionService } from 'src/app/services/data-connection.service';
+import { Sp32Service } from 'src/app/services/sp32.service';
 import { TurnoService } from 'src/app/services/turnos.service';
 import { GraficoComponent } from 'src/app/tablero/components/grafico/grafico.component';
 
@@ -25,7 +26,7 @@ export class TableroUsuarioComponent implements OnInit{
 
   user:User | null;
   historial:number[]=[];
-  constructor(private userService: AuthService,private router:Router, private clienteService:DataConnectionService, private turnoService:TurnoService) {
+  constructor(private userService: AuthService,private router:Router, private clienteService:DataConnectionService, private turnoService:TurnoService, private sp32Service:Sp32Service) {
     this.user = this.userService.getCurrentUser();
   }
   cliente:Cliente = {} as Cliente
